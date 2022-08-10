@@ -1,6 +1,12 @@
 'use strict';
 exports.howOld = function (req, res) {
     if (dateValidation(req.params.dob) === true) {
+        var dob = new Date(req.params.dob+"T00:00");
+        if (dob.getTime()> Date.now()) {
+            res.status(400).send({
+                status: false,
+                message:'Invalid Date. Choose days in the past not future'});
+        }
         res.send({
             status:true,
             data: {
@@ -19,7 +25,8 @@ exports.howOld = function (req, res) {
 function dateValidation(dateString){      
     let dateformat = /^[+-]?\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;      
           
-    if(dateString.match(dateformat)){      
+    if(dateString.match(dateformat)){
+
         let operator = dateString.split('-');      
          
         let datepart = [];      
@@ -53,10 +60,17 @@ function dateValidation(dateString){
     return true;      
 }  
 function calculateAge(dob) {
-    console.log(dob);
     var birthDate = new Date(dob+"T00:00");
-    console.log(birthDate);
-    var difference = Date.now() - birthDate.getTime();
+    var difference = Math.abs(Date.now() - birthDate.getTime());
     var age = new Date(difference);
-    return Math.abs(age.getFullYear()-1970);
+    var days = Number(Math.abs(age.getDay()));
+    var months = Number(Math.abs(age.getMonth()+1));
+    var years = Number(Math.abs(age.getFullYear()-1970));
+    var text = ({
+        days: days == 1 ? "day" : "days",
+        months: months == 1 ? "month" : "months",
+        years: years == 1 ? "year" : "years"
+    });
+    var msg = years + " " + text.years + " " + months + " " + text.months + " " + days + " " + text.days;
+    return msg;
 } 
