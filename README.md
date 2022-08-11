@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/365b16442eca464a9ccb211101b6c47c)](https://app.codacy.com/gh/hayatu89/simple-api?utm_source=github.com&utm_medium=referral&utm_content=hayatu89/simple-api&utm_campaign=Badge_Grade_Settings)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c06e3d85f828471697516ab6d658c21d)](https://www.codacy.com/gh/hayatu89/simple-api/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hayatu89/simple-api&amp;utm_campaign=Badge_Grade)
 
 
