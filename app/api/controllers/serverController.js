@@ -32,27 +32,27 @@ exports.howOld = function (req, res) {
  * @returns boolean
  */
 function dateValidation(dateString){      
-    const dateformat = /^[+-]?\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;      
+    let dateformat = /^[+-]?\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;      
           
     if(dateString.match(dateformat)){
 
-        const operator = dateString.split('-');      
+        let operator = dateString.split('-');      
          
-        const datepart = [];      
+        let datepart = [];      
         if (operator.length>1){      
             datepart = dateString.split('-');      
         }      
-        const year= parseInt(datepart[0], 10);      
-        const month = parseInt(datepart[1], 10);      
-        const day = parseInt(datepart[2], 10);      
+        let year= parseInt(datepart[0], 10);      
+        let month = parseInt(datepart[1], 10);      
+        let day = parseInt(datepart[2], 10);      
                  
-        const ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];      
+        let ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];      
         if (month==1 || month>2){      
             if (day>ListofDays[month-1]){           
                 return false;      
             }      
         }else if (month===2){      
-            const leapYear = false;      
+            let leapYear = false;      
             if ( (!(year % 4) && year % 100) || !(year % 400)) {      
                 leapYear = true;      
             }      
@@ -74,18 +74,18 @@ function dateValidation(dateString){
  * @returns String
  */ 
 function calculateAge(dob) {
-    const birthDate = new Date(dob+"T00:00");
-    const difference = Math.abs(Date.now() - birthDate.getTime());
-    const age = new Date(difference);
-    const days = Number(Math.abs(age.getDay()));
-    const months = Number(Math.abs(age.getMonth()));
-    const years = Number(Math.abs(age.getFullYear()-1970));
-    const text = ({
+    let birthDate = new Date(dob+"T00:00");
+    let difference = Math.abs(Date.now() - birthDate.getTime());
+    let age = new Date(difference);
+    let days = Number(Math.abs(age.getDay()));
+    let months = Number(Math.abs(age.getMonth()));
+    let years = Number(Math.abs(age.getFullYear()-1970));
+    let text = ({
         days: days === 1 ? "day" : "days",
         months: months === 1 ? "month" : "months",
         years: years === 1 ? "year" : "years"
     });
 
-    const msg = years + " " + text.years + " " + months + " " + text.months + " " + days + " " + text.days;
+    let msg = years + " " + text.years + " " + months + " " + text.months + " " + days + " " + text.days;
     return msg;
 } 
