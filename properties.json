@@ -4,5 +4,5 @@
     "email": "hayatu2@gmail.com",
     "githubUsername": "hayatu89",
     "deployedAppURL": "https://howold-api.fly.dev",
-    "explainer": "This API returns age when date of birth is given to it"
+    "explainer": "This API returns age when date of birth is given to it. The API is built in Javascript using Express JS"
 }

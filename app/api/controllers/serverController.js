@@ -5,6 +5,11 @@
  * @param {Object} res Response object with accompanying functions
  */
 exports.howOld = function (req, res) {
+    if (!req.query.dob) {
+        res.status(400).send({
+            status: false,
+            message:'Invalid Parameter. use dob only'});
+        }
     if (dateValidation(req.query.dob) === true) {
         const dob = new Date(req.query.dob);
         if (dob.getTime()> Date.now()) {
@@ -74,8 +79,9 @@ function dateValidation(dateString){
  * @returns String
  */ 
 function calculateAge(dob) {
-    let birthDate = new Date(dob+"T00:00");
-    let difference = Math.abs(Date.now() - birthDate.getTime());
+    let birthDate = new Date(dob);
+    let difference = Date.now() - birthDate.getTime();
+    console.log(difference)
     let age = new Date(difference);
     let days = Number(Math.abs(age.getDay()));
     let months = Number(Math.abs(age.getMonth()));

@@ -6,7 +6,9 @@ const rateLimit = require('express-rate-limit');
 const api = express();
 const limit = rateLimit({
   windowMs: 1000,
-  max: 3 
+  max: 3,
+  standardHeaders: true,
+  legacyHeaders: false, 
 });
 api.use(limit);
 api.use(bodyParser.urlencoded({ extended: true }));
