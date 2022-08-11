@@ -15,7 +15,6 @@ api.use(bodyParser.json());
 const routes = require('./api/routes/serverRoutes');
 routes(api);
 api.use(function(req, res) {
-  rateLimiting();
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
 api.listen(port);

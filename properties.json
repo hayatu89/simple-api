@@ -3,6 +3,6 @@
     "track": "backend",
     "email": "hayatu2@gmail.com",
     "githubUsername": "hayatu89",
-    "deployedAppURL": "https://hayatu.xyz",
+    "deployedAppURL": "https://howold-api.fly.dev",
     "explainer": "This API returns age when date of birth is given to it"
 }

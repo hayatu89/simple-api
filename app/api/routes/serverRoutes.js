@@ -2,6 +2,6 @@
 
 module.exports = function (api) {
     var simpleAPI = require('../controllers/serverController');
-    api.route('/howold/:dob')
+    api.route('/howold')
         .get(simpleAPI.howOld);
 }

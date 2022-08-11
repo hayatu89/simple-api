@@ -1,7 +1,12 @@
 'use strict';
+/**
+ * Controller method to handle Age Calculation and return response to user
+ * @param {Object} req Request object containing all the query params with accompanying functions
+ * @param {Object} res Response object with accompanying functions
+ */
 exports.howOld = function (req, res) {
-    if (dateValidation(req.params.dob) === true) {
-        var dob = new Date(req.params.dob+"T00:00");
+    if (dateValidation(req.query.dob) === true) {
+        var dob = new Date(req.query.dob);
         if (dob.getTime()> Date.now()) {
             res.status(400).send({
                 status: false,
@@ -10,7 +15,7 @@ exports.howOld = function (req, res) {
         res.send({
             status:true,
             data: {
-                age: calculateAge(req.params.dob)
+                age: calculateAge(req.query.dob)
             },
             message: 'successful'
         });
@@ -21,7 +26,11 @@ exports.howOld = function (req, res) {
     }
 }
 
-//Validate Date format
+/**
+ * Check if request string in YYYY-MM-DD
+ * @param {Date} dateString Date String
+ * @returns boolean
+ */
 function dateValidation(dateString){      
     let dateformat = /^[+-]?\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;      
           
@@ -58,7 +67,12 @@ function dateValidation(dateString){
         return false;      
     }      
     return true;      
-}  
+} 
+/**
+ * Calculate the Age in years, months and Days give the Date of Birth
+ * @param {Date} dob Date of Birth
+ * @returns String
+ */ 
 function calculateAge(dob) {
     var birthDate = new Date(dob+"T00:00");
     var difference = Math.abs(Date.now() - birthDate.getTime());
@@ -71,6 +85,7 @@ function calculateAge(dob) {
         months: months == 1 ? "month" : "months",
         years: years == 1 ? "year" : "years"
     });
+
     var msg = years + " " + text.years + " " + months + " " + text.months + " " + days + " " + text.days;
     return msg;
 } 
