@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 module.exports = function (api) {
-    var simpleAPI = require('../controllers/serverController');
+    const simpleAPI = require('../controllers/serverController');
     api.route('/howold')
         .get(simpleAPI.howOld);
 }

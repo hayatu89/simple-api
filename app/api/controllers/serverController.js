@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 /**
  * Controller method to handle Age Calculation and return response to user
  * @param {Object} req Request object containing all the query params with accompanying functions
@@ -6,7 +6,7 @@
  */
 exports.howOld = function (req, res) {
     if (dateValidation(req.query.dob) === true) {
-        var dob = new Date(req.query.dob);
+        const dob = new Date(req.query.dob);
         if (dob.getTime()> Date.now()) {
             res.status(400).send({
                 status: false,
@@ -32,27 +32,27 @@ exports.howOld = function (req, res) {
  * @returns boolean
  */
 function dateValidation(dateString){      
-    let dateformat = /^[+-]?\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;      
+    const dateformat = /^[+-]?\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;      
           
     if(dateString.match(dateformat)){
 
-        let operator = dateString.split('-');      
+        const operator = dateString.split('-');      
          
-        let datepart = [];      
+        const datepart = [];      
         if (operator.length>1){      
             datepart = dateString.split('-');      
         }      
-        let year= parseInt(datepart[0]);      
-        let month = parseInt(datepart[1]);      
-        let day = parseInt(datepart[2]);      
+        const year= parseInt(datepart[0], 10);      
+        const month = parseInt(datepart[1], 10);      
+        const day = parseInt(datepart[2], 10);      
                  
-        let ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];      
+        const ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];      
         if (month==1 || month>2){      
             if (day>ListofDays[month-1]){           
                 return false;      
             }      
-        }else if (month==2){      
-            let leapYear = false;      
+        }else if (month===2){      
+            const leapYear = false;      
             if ( (!(year % 4) && year % 100) || !(year % 400)) {      
                 leapYear = true;      
             }      
@@ -74,18 +74,18 @@ function dateValidation(dateString){
  * @returns String
  */ 
 function calculateAge(dob) {
-    var birthDate = new Date(dob+"T00:00");
-    var difference = Math.floor(Date.now() - birthDate.getTime());
-    var age = new Date(difference);
-    var days = Number(Math.floor(age.getDay()));
-    var months = Number(Math.floor(age.getMonth()));
-    var years = Number(Math.floor(age.getFullYear()-1970));
-    var text = ({
-        days: days == 1 ? "day" : "days",
-        months: months == 1 ? "month" : "months",
-        years: years == 1 ? "year" : "years"
+    const birthDate = new Date(dob+"T00:00");
+    const difference = Math.abs(Date.now() - birthDate.getTime());
+    const age = new Date(difference);
+    const days = Number(Math.abs(age.getDay()));
+    const months = Number(Math.abs(age.getMonth()));
+    const years = Number(Math.abs(age.getFullYear()-1970));
+    const text = ({
+        days: days === 1 ? "day" : "days",
+        months: months === 1 ? "month" : "months",
+        years: years === 1 ? "year" : "years"
     });
 
-    var msg = years + " " + text.years + " " + months + " " + text.months + " " + days + " " + text.days;
+    const msg = years + " " + text.years + " " + months + " " + text.months + " " + days + " " + text.days;
     return msg;
 } 
