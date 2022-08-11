@@ -61,12 +61,7 @@ function dateValidation(dateString){
             if ( (!(year % 4) && year % 100) || !(year % 400)) {      
                 leapYear = true;      
             }      
-            if ((leapYear === false) && (day>=29)){      
-                return false;      
-            }else      
-            if ((leapYear===true) && (day>29)){          
-                return false;      
-            }      
+           return false;
         }      
     }else{           
         return false;      
