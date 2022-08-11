@@ -75,11 +75,11 @@ function dateValidation(dateString){
  */ 
 function calculateAge(dob) {
     var birthDate = new Date(dob+"T00:00");
-    var difference = Math.abs(Date.now() - birthDate.getTime());
+    var difference = Math.floor(Date.now() - birthDate.getTime());
     var age = new Date(difference);
-    var days = Number(Math.abs(age.getDay()));
-    var months = Number(Math.abs(age.getMonth()+1));
-    var years = Number(Math.abs(age.getFullYear()-1970));
+    var days = Number(Math.floor(age.getDay()));
+    var months = Number(Math.floor(age.getMonth()));
+    var years = Number(Math.floor(age.getFullYear()-1970));
     var text = ({
         days: days == 1 ? "day" : "days",
         months: months == 1 ? "month" : "months",
