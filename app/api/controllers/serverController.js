@@ -75,7 +75,7 @@ function dateValidation(dateString){
     return true;      
 } 
 /**
- * Calculate the Age in years, months and Days give the Date of Birth
+ * Calculate the Age in years and months given the Date of Birth
  * @param {Date} dob Date of Birth
  * @returns String
  */ 
@@ -89,7 +89,12 @@ function calculateAge(dob) {
         years: years === 1 ? "year" : "years"
     });
     return (years < 1 ?  months + " " + text.months : months < 1? years + " " + text.years: years + " " + text.years + " " + months + " " + text.months );
-} 
+}
+/**
+ * Calculate the months in the age
+ * @param {int} diff Time difference in milliseconds
+ * @returns {int}
+ */ 
 function calculateMonths(diff) {
     const month = Math.abs(diff/(2.628e+9));
     return (month > 12 ? ~~(month-12) : month);
