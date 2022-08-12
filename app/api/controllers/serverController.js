@@ -27,25 +27,26 @@ exports.howOld = function (req, res) {
     } else {
         res.status(400).send({
             status: false,
-            message:'Invalid Format. Valid format is YYYY-MM-DD'});
+            message:'Invalid Format. Valid format is YYYY-MM-DD or YYYY/MM/DD or YYYY.MM.DD'});
     }
 }
 
 /**
- * Check if request string in YYYY-MM-DD
+ * Check if request string in YYYY-MM-DD or YYYY/MM/DD or YYYY.MM.DD
  * @param {Date} dateString Date String
  * @returns boolean
  */
 function dateValidation(dateString){      
-    let dateformat = /^[+-]?\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;      
-          
+    let dateformat = /((^[+-]?\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$))|(^[+-]?\d{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])$)|(^[+-]?\d{4}.(0[1-9]|1[0-2]).(0[1-9]|[12][0-9]|3[01]))$/;      
+         
     if(dateString.match(dateformat)){
 
-        let operator = dateString.split('-');      
-         
+        let operator = dateString.split(/\/|\.|-/);      
+        
         let datepart = [];      
         if (operator.length>1){      
-            datepart = dateString.split('-');      
+            datepart = dateString.split(/\/|\.|-/); 
+                 
         }      
         let year= parseInt(datepart[0], 10);      
         let month = parseInt(datepart[1], 10);      
@@ -81,17 +82,15 @@ function dateValidation(dateString){
 function calculateAge(dob) {
     let birthDate = new Date(dob);
     let difference = Date.now() - birthDate.getTime();
-    console.log(difference)
-    let age = new Date(difference);
-    let days = Number(Math.abs(age.getDay()));
-    let months = Number(Math.abs(age.getMonth()));
-    let years = Number(Math.abs(age.getFullYear()-1970));
+    let years = ~~(Math.abs(difference / (1000 * 60 * 60 * 24 * 365)));
+    let months = ~~(calculateMonths(difference));
     let text = ({
-        days: days === 1 ? "day" : "days",
         months: months === 1 ? "month" : "months",
         years: years === 1 ? "year" : "years"
     });
-
-    let msg = years + " " + text.years + " " + months + " " + text.months + " " + days + " " + text.days;
-    return msg;
+    return (years < 1 ?  months + " " + text.months : months < 1? years + " " + text.years: years + " " + text.years + " " + months + " " + text.months );
 } 
+function calculateMonths(diff) {
+    const month = Math.abs(diff/(2.628e+9));
+    return (month > 12 ? ~~(month-12) : month);
+}
