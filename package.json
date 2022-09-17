@@ -1,5 +1,30 @@
 {
   "dependencies": {
-    "dotenv": "^16.0.1"
-  }
+    "dotenv": "^16.0.1",
+    "moment": "^2.29.4",
+    "nodemon": "^2.0.20",
+    "redis": "^4.3.1"
+  },
+  "name": "simple-api",
+  "description": "[![Codacy Badge](https://app.codacy.com/project/badge/Grade/c06e3d85f828471697516ab6d658c21d)](https://www.codacy.com/gh/hayatu89/simple-api/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hayatu89/simple-api&amp;utm_campaign=Badge_Grade)",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hayatu89/simple-api.git"
+  },
+  "keywords": [
+    "DOB",
+    "Birthday"
+  ],
+  "author": "Hayatu Abubakar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hayatu89/simple-api/issues"
+  },
+  "homepage": "https://github.com/hayatu89/simple-api#readme"
 }
